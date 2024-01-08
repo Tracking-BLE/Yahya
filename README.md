@@ -10,7 +10,7 @@
 - Utilisation d'une page de configuration pour filtrer les beacons selon le Major ou une plage de RSSI
 - Identification de la zone de stockage d’un support de charge ou d’un outil précis
 - Configuration de la fonction « tampon de données » :
-  mode de transmission
+ ** mode de transmission**
   filtrage des beacons selon le Major et/ou une plage de RSSI
 ### 3.2. Logistique
 - Géstion des camins

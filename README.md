@@ -1,25 +1,11 @@
-# ETUDIANT 3
-## 1. Instalalation du serveur WEB et BD
-## 2. BD conforme au MLD
-## 3. Script PHP
-### 3.1. Entrepôt
-~~~~
-- Géstion de la liste des gateway
-- Association des les supports de charge et les outils à un beacon
-- Visualisation de la liste des supports de charge et des outils pour chacune des zones de stockage
-- Visualisation des dates-heures d’entrée et de sortie des supports de charge
-- Utilisation d'une page de configuration pour filtrer les beacons selon le Major ou une plage de RSSI
-- Identification de la zone de stockage d’un support de charge ou d’un outil précis
-- Configuration de la fonction « tampon de données » :
-  Mode de transmission
-  Filtrage des beacons selon le Major et/ou une plage de RSSI
-~~~~
-### 3.2. Logistique
-~~~~
-- Géstion des camins
-- Sélection d'un camion et visulalisation des donées
-- Géo-localisation des camions
-- Géo-localisation des supports de charge
-- visulalisation des supports de charge présents dans les camions
-- Sélection d'un support dee charge et identification du camion qui le transporte
-~~~~
+# ETUDIANT 2
+## Instalation et configuration du  point d’accès sans fil
+## Définition du format du fichier de configuration sur le tampon de données
+## Test et configuration des gateways BLE/wifi
+## Sur le tampon de données :
+### 1. Instalalation du Raspbian, Python et les modules http.server et json
+### 2. Réalisation des scripts Python pour
+#### 2.1. Traitemant des requêtes venant des gateways (enregistrer les données JSON)
+#### 2.2. Transmission des données vers le serveur
+### 3. Configuration du système pour lancer le programme au démarrage
+### 4. Sur le serveur réalisation des scripts PHP de traitement des requêtes HTTP venant du tampon de données

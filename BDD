@@ -1,0 +1,59 @@
+#------------------------------------------------------------
+#        Script MySQL.
+#------------------------------------------------------------
+
+
+#------------------------------------------------------------
+# Table: Actif
+#------------------------------------------------------------
+
+CREATE TABLE Actif(
+        id  Int  Auto_increment  NOT NULL ,
+        nom Varchar (50) NOT NULL
+	,CONSTRAINT Actif_PK PRIMARY KEY (id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Beacon
+#------------------------------------------------------------
+
+CREATE TABLE Beacon(
+        id       Int  Auto_increment  NOT NULL ,
+        matricul Varchar (50) NOT NULL ,
+        id_Actif Int NOT NULL
+	,CONSTRAINT Beacon_PK PRIMARY KEY (id)
+
+	,CONSTRAINT Beacon_Actif_FK FOREIGN KEY (id_Actif) REFERENCES Actif(id)
+	,CONSTRAINT Beacon_Actif_AK UNIQUE (id_Actif)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Camion
+#------------------------------------------------------------
+
+CREATE TABLE Camion(
+        id           Int  Auto_increment  NOT NULL ,
+        matricul     Varchar (50) NOT NULL ,
+        tempetature  Varchar (50) NOT NULL ,
+        localisation Varchar (50) NOT NULL ,
+        id_Beacon    Int
+	,CONSTRAINT Camion_PK PRIMARY KEY (id)
+
+	,CONSTRAINT Camion_Beacon_FK FOREIGN KEY (id_Beacon) REFERENCES Beacon(id)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: Zone
+#------------------------------------------------------------
+
+CREATE TABLE Zone(
+        id        Int NOT NULL ,
+        id_Beacon Int
+	,CONSTRAINT Zone_PK PRIMARY KEY (id)
+
+	,CONSTRAINT Zone_Beacon_FK FOREIGN KEY (id_Beacon) REFERENCES Beacon(id)
+)ENGINE=InnoDB;
+

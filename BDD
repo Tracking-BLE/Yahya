@@ -4,56 +4,54 @@
 
 
 #------------------------------------------------------------
-# Table: Actif
+# Table: actif
 #------------------------------------------------------------
 
-CREATE TABLE Actif(
+CREATE TABLE actif(
         id  Int  Auto_increment  NOT NULL ,
         nom Varchar (50) NOT NULL
-	,CONSTRAINT Actif_PK PRIMARY KEY (id)
+	,CONSTRAINT actif_PK PRIMARY KEY (id)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Beacon
+# Table: beacon
 #------------------------------------------------------------
 
-CREATE TABLE Beacon(
-        id       Int  Auto_increment  NOT NULL ,
+CREATE TABLE beacon(
         matricul Varchar (50) NOT NULL ,
-        id_Actif Int NOT NULL
-	,CONSTRAINT Beacon_PK PRIMARY KEY (id)
+        id       Int NOT NULL
+	,CONSTRAINT beacon_PK PRIMARY KEY (matricul)
 
-	,CONSTRAINT Beacon_Actif_FK FOREIGN KEY (id_Actif) REFERENCES Actif(id)
-	,CONSTRAINT Beacon_Actif_AK UNIQUE (id_Actif)
+	,CONSTRAINT beacon_actif_FK FOREIGN KEY (id) REFERENCES actif(id)
+	,CONSTRAINT beacon_actif_AK UNIQUE (id)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Camion
+# Table: camion
 #------------------------------------------------------------
 
-CREATE TABLE Camion(
-        id           Int  Auto_increment  NOT NULL ,
-        matricul     Varchar (50) NOT NULL ,
-        tempetature  Varchar (50) NOT NULL ,
-        localisation Varchar (50) NOT NULL ,
-        id_Beacon    Int
-	,CONSTRAINT Camion_PK PRIMARY KEY (id)
+CREATE TABLE camion(
+        matricul        Varchar (50) NOT NULL ,
+        localisation    Varchar (50) NOT NULL ,
+        tempe           Varchar (50) NOT NULL ,
+        matricul_beacon Varchar (50)
+	,CONSTRAINT camion_PK PRIMARY KEY (matricul)
 
-	,CONSTRAINT Camion_Beacon_FK FOREIGN KEY (id_Beacon) REFERENCES Beacon(id)
+	,CONSTRAINT camion_beacon_FK FOREIGN KEY (matricul_beacon) REFERENCES beacon(matricul)
 )ENGINE=InnoDB;
 
 
 #------------------------------------------------------------
-# Table: Zone
+# Table: zone
 #------------------------------------------------------------
 
-CREATE TABLE Zone(
-        id        Int NOT NULL ,
-        id_Beacon Int
-	,CONSTRAINT Zone_PK PRIMARY KEY (id)
+CREATE TABLE zone(
+        numero   Int NOT NULL ,
+        matricul Varchar (50)
+	,CONSTRAINT zone_PK PRIMARY KEY (numero)
 
-	,CONSTRAINT Zone_Beacon_FK FOREIGN KEY (id_Beacon) REFERENCES Beacon(id)
+	,CONSTRAINT zone_beacon_FK FOREIGN KEY (matricul) REFERENCES beacon(matricul)
 )ENGINE=InnoDB;
 

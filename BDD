@@ -51,6 +51,7 @@ CREATE TABLE beacon(
         minor           Varchar (50) NOT NULL ,
         DateHeure       Varchar (50) NOT NULL ,
         CamionOuZone    Bool NOT NULL ,
+        RSSI            Varchar (50) NOT NULL ,
         immatriculation Varchar (50) ,
         id_ZONE         Int
 	,CONSTRAINT beacon_PK PRIMARY KEY (id_BEACON)

@@ -4,42 +4,25 @@
 
 
 #------------------------------------------------------------
-# Table: actif
-#------------------------------------------------------------
-
-CREATE TABLE actif(
-        id  Int  Auto_increment  NOT NULL ,
-        nom Varchar (50) NOT NULL
-	,CONSTRAINT actif_PK PRIMARY KEY (id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
-# Table: beacon
-#------------------------------------------------------------
-
-CREATE TABLE beacon(
-        matricul Varchar (50) NOT NULL ,
-        id       Int NOT NULL
-	,CONSTRAINT beacon_PK PRIMARY KEY (matricul)
-
-	,CONSTRAINT beacon_actif_FK FOREIGN KEY (id) REFERENCES actif(id)
-	,CONSTRAINT beacon_actif_AK UNIQUE (id)
-)ENGINE=InnoDB;
-
-
-#------------------------------------------------------------
 # Table: camion
 #------------------------------------------------------------
 
 CREATE TABLE camion(
-        matricul        Varchar (50) NOT NULL ,
+        immatriculation Varchar (50) NOT NULL ,
         localisation    Varchar (50) NOT NULL ,
-        tempe           Varchar (50) NOT NULL ,
-        matricul_beacon Varchar (50)
-	,CONSTRAINT camion_PK PRIMARY KEY (matricul)
+        tempe           Varchar (50) NOT NULL
+	,CONSTRAINT camion_PK PRIMARY KEY (immatriculation)
+)ENGINE=InnoDB;
 
-	,CONSTRAINT camion_beacon_FK FOREIGN KEY (matricul_beacon) REFERENCES beacon(matricul)
+
+#------------------------------------------------------------
+# Table: gateway
+#------------------------------------------------------------
+
+CREATE TABLE gateway(
+        id_GATEWAY Int  Auto_increment  NOT NULL ,
+        MAC        Varchar (50) NOT NULL
+	,CONSTRAINT gateway_PK PRIMARY KEY (id_GATEWAY)
 )ENGINE=InnoDB;
 
 
@@ -48,10 +31,46 @@ CREATE TABLE camion(
 #------------------------------------------------------------
 
 CREATE TABLE zone(
-        numero   Int NOT NULL ,
-        matricul Varchar (50)
-	,CONSTRAINT zone_PK PRIMARY KEY (numero)
+        id_ZONE    Int  Auto_increment  NOT NULL ,
+        nom        Varchar (50) NOT NULL ,
+        id_GATEWAY Int NOT NULL
+	,CONSTRAINT zone_PK PRIMARY KEY (id_ZONE)
 
-	,CONSTRAINT zone_beacon_FK FOREIGN KEY (matricul) REFERENCES beacon(matricul)
+	,CONSTRAINT zone_gateway_FK FOREIGN KEY (id_GATEWAY) REFERENCES gateway(id_GATEWAY)
+	,CONSTRAINT zone_gateway_AK UNIQUE (id_GATEWAY)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: beacon
+#------------------------------------------------------------
+
+CREATE TABLE beacon(
+        id_BEACON       Int  Auto_increment  NOT NULL ,
+        major           Varchar (50) NOT NULL ,
+        minor           Varchar (50) NOT NULL ,
+        DateHeure       Varchar (50) NOT NULL ,
+        CamionOuZone    Bool NOT NULL ,
+        immatriculation Varchar (50) ,
+        id_ZONE         Int
+	,CONSTRAINT beacon_PK PRIMARY KEY (id_BEACON)
+
+	,CONSTRAINT beacon_camion_FK FOREIGN KEY (immatriculation) REFERENCES camion(immatriculation)
+	,CONSTRAINT beacon_zone0_FK FOREIGN KEY (id_ZONE) REFERENCES zone(id_ZONE)
+)ENGINE=InnoDB;
+
+
+#------------------------------------------------------------
+# Table: actif
+#------------------------------------------------------------
+
+CREATE TABLE actif(
+        id_ACTIF  Int  Auto_increment  NOT NULL ,
+        nom       Varchar (50) NOT NULL ,
+        id_BEACON Int NOT NULL
+	,CONSTRAINT actif_PK PRIMARY KEY (id_ACTIF)
+
+	,CONSTRAINT actif_beacon_FK FOREIGN KEY (id_BEACON) REFERENCES beacon(id_BEACON)
+	,CONSTRAINT actif_beacon_AK UNIQUE (id_BEACON)
 )ENGINE=InnoDB;
 

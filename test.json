@@ -1,0 +1,1 @@
+{"gateway 1": {"Beacon 1": {"major": "0001", "minor": "0004", "RSSI": "-20"}, "Beacon 2": {"major": "0001", "minor": "004F", "RSSI": "-45"}}, "gateway 2": {"Beacon 3": {"major": "0001", "minor": "0004", "RSSI": "-35"}, "Beacon 4": {"major": "0001", "minor": "00FF", "RSSI": "-10"}}}
